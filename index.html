@@ -59,6 +59,14 @@
   .footer-note { margin-top: 20px; background: #fff3e0; border-radius: 12px; padding: 16px; font-size: 0.8rem; color: #8a6d3b; border-left: 4px solid #f0ad4e; }
   .footer-note strong { color: #8a5a00; }
   
+  .video-option { display: flex; gap: 12px; padding: 14px; background: #fff; border: 1px solid #f0f0f0; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; align-items: flex-start; }
+  .video-option:hover { border-color: #FFB5C2; box-shadow: 0 2px 8px rgba(255,181,194,0.2); }
+  .vo-badge { font-size: 0.65rem; font-weight: 700; padding: 4px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .vo-info { flex: 1; }
+  .vo-title { font-size: 0.85rem; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+  .vo-desc { font-size: 0.75rem; color: #666; line-height: 1.4; margin-bottom: 6px; }
+  .vo-tag { font-size: 0.65rem; color: #FFB5C2; font-weight: 600; }
+  
   .footer { text-align: center; padding: 24px; font-size: 0.75rem; color: #999; }
 </style>
 </head>
@@ -199,6 +207,65 @@
     </ul>
   </div>
   
+  <div class="info-section" style="margin-top: 24px;">
+    <h2>🎬 Video Options — Pick for Gallery</h2>
+    <p style="font-size: 0.8rem; color: #888; margin-bottom: 16px;">Top performing creator videos. Click to watch in Slack, then tell me which to use for each video slot.</p>
+    
+    <div class="video-option" onclick="window.open('https://careandbloom.slack.com/files/U0AAHJESV2B/F0AHDM1N1B7', '_blank')">
+      <div class="vo-badge" style="background: #e0f5e0; color: #2a8a2a;">ROAS 3.19</div>
+      <div class="vo-info">
+        <div class="vo-title">🏆 ACH VITALII — How-To Style</div>
+        <div class="vo-desc">"Three places I bring this lemon: in the shower (waterproof), travel, bed." 11 purchases. <strong>Best how-to creator video.</strong></div>
+        <div class="vo-tag">Recommended for: Slot 5 (Demo) or How-To slot</div>
+      </div>
+    </div>
+
+    <div class="video-option" onclick="window.open('https://careandbloom.slack.com/files/U0AAHJESV2B/F0AH1L3FY31', '_blank')">
+      <div class="vo-badge" style="background: #fff3e0; color: #8a5a00;">31 purchases</div>
+      <div class="vo-info">
+        <div class="vo-title">@dream1ncolour — Talking Head UGC</div>
+        <div class="vo-desc">"It's 2026, and yes, I'm talking about self-care. This lemon is not just a fruit..." ROAS 1.19 but highest volume. Creator handle only.</div>
+        <div class="vo-tag">Recommended for: Social proof / UGC slot</div>
+      </div>
+    </div>
+
+    <div class="video-option" onclick="window.open('https://careandbloom.slack.com/files/U0AAHJESV2B/F0AHW1MKHAM', '_blank')">
+      <div class="vo-badge" style="background: #fff3e0; color: #8a5a00;">30 purchases</div>
+      <div class="vo-info">
+        <div class="vo-title">Remo — Reaction / Unboxing</div>
+        <div class="vo-desc">Genuine surprise reaction. "Wow. There you go. It is very discreet." ROAS 1.31, strong volume.</div>
+        <div class="vo-tag">Recommended for: Unboxing / first impressions slot</div>
+      </div>
+    </div>
+
+    <div class="video-option" onclick="window.open('https://careandbloom.slack.com/files/U0AAHJESV2B/F0AHF27G09L', '_blank')">
+      <div class="vo-badge" style="background: #e0f5e0; color: #2a8a2a;">ROAS 2.09</div>
+      <div class="vo-info">
+        <div class="vo-title">Lem Animated Intro</div>
+        <div class="vo-desc">"Hey, you. I know I look like a cute little lemon, but trust me, I'm way more fun than lemonade." 25 purchases. Fun character-driven.</div>
+        <div class="vo-tag">Recommended for: Fun intro / brand personality slot</div>
+      </div>
+    </div>
+
+    <div class="video-option" onclick="window.open('https://drive.google.com/file/d/1bLWBbPksFBuH-hCQXVdM24Kr3pmMWxqN/view', '_blank')">
+      <div class="vo-badge" style="background: #ffe0e0; color: #ff4444;">⭐ Rachana pick</div>
+      <div class="vo-info">
+        <div class="vo-title">Asia French Couple — Couples How-To</div>
+        <div class="vo-desc">Rachana: "One of the best pieces of content I've seen." Couples angle, boyfriend discovery style. Needs typo fixes (stong → strong, discrete → discreet).</div>
+        <div class="vo-tag">Recommended for: Slot 12 (Couples) replacement</div>
+      </div>
+    </div>
+
+    <div class="video-option" style="opacity: 0.6; border-style: dashed;">
+      <div class="vo-badge" style="background: #f0f0f0; color: #666;">PENDING</div>
+      <div class="vo-info">
+        <div class="vo-title">Amanda's 11 Creator How-To Videos</div>
+        <div class="vo-desc">Each creator owes 1 how-to-use-Lolly video (edited in house). Still in production — will arrive in 1-2 weeks.</div>
+        <div class="vo-tag">Best one should replace product demo slot when ready</div>
+      </div>
+    </div>
+  </div>
+
   <div class="footer-note">
     <strong>⚠️ Still needed (filming required):</strong><br>
     Slot 13: Suction demo — air pulse movement visible on surface<br>
