@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lem Gallery Preview — Proposed Order</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFF5F0; color: #333; }
+  
+  .header { background: linear-gradient(135deg, #FFB5C2, #FFD4DB); padding: 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; color: #1a1a1a; font-weight: 600; }
+  .header p { font-size: 0.85rem; color: #666; margin-top: 4px; }
+  
+  .gallery-container { max-width: 500px; margin: 0 auto; padding: 16px; }
+  
+  .main-viewer { width: 100%; aspect-ratio: 1; background: #fff; border-radius: 16px; overflow: hidden; position: relative; box-shadow: 0 2px 20px rgba(0,0,0,0.08); margin-bottom: 12px; }
+  .main-viewer img { width: 100%; height: 100%; object-fit: contain; display: none; }
+  .main-viewer img.active { display: block; }
+  .main-viewer video { width: 100%; height: 100%; object-fit: contain; display: none; }
+  .main-viewer video.active { display: block; }
+  
+  .main-label { text-align: center; padding: 8px 0; font-size: 0.85rem; color: #666; font-weight: 500; min-height: 40px; }
+  .main-label .slot-num { color: #FFB5C2; font-weight: 700; }
+  .main-label .new-badge { background: #ff4444; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+  .main-label .video-badge { background: #333; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+  
+  .thumbstrip { display: flex; gap: 8px; overflow-x: auto; padding: 8px 0; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .thumbstrip::-webkit-scrollbar { height: 4px; }
+  .thumbstrip::-webkit-scrollbar-thumb { background: #FFB5C2; border-radius: 4px; }
+  
+  .thumb { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 10px; overflow: hidden; cursor: pointer; position: relative; border: 2px solid transparent; transition: all 0.2s; scroll-snap-align: start; background: #fff; }
+  .thumb.active { border-color: #FFB5C2; box-shadow: 0 0 0 2px rgba(255,181,194,0.3); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .thumb video { width: 100%; height: 100%; object-fit: cover; }
+  
+  .thumb .overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+  .thumb .play-icon { width: 24px; height: 24px; background: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .thumb .play-icon::after { content: ''; width: 0; height: 0; border-left: 8px solid #fff; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-left: 2px; }
+  
+  .thumb .new-dot { position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; background: #ff4444; border-radius: 50%; }
+  .thumb .slot { position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: #fff; background: rgba(0,0,0,0.5); padding: 1px 4px; border-radius: 3px; font-weight: 600; }
+  
+  .info-section { margin-top: 24px; background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+  .info-section h2 { font-size: 1rem; margin-bottom: 12px; color: #1a1a1a; }
+  .slot-list { list-style: none; }
+  .slot-list li { padding: 8px 0; border-bottom: 1px solid #f5f5f5; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .slot-list li:last-child { border-bottom: none; }
+  .slot-list li:hover { background: #FFF5F0; margin: 0 -8px; padding: 8px; border-radius: 8px; }
+  .slot-list .num { background: #FFB5C2; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; }
+  .slot-list .tag { font-size: 0.65rem; padding: 2px 6px; border-radius: 8px; font-weight: 600; }
+  .tag-new { background: #ffe0e0; color: #ff4444; }
+  .tag-video { background: #e0e0e0; color: #333; }
+  .tag-keep { background: #e0f5e0; color: #2a8a2a; }
+  
+  .footer-note { margin-top: 20px; background: #fff3e0; border-radius: 12px; padding: 16px; font-size: 0.8rem; color: #8a6d3b; border-left: 4px solid #f0ad4e; }
+  .footer-note strong { color: #8a5a00; }
+  
+  .footer { text-align: center; padding: 24px; font-size: 0.75rem; color: #999; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🍋 Lem Gallery Preview</h1>
+  <p>Proposed gallery order — tap thumbnails to preview</p>
+</div>
+
+<div class="gallery-container">
+  <div class="main-viewer" id="mainViewer">
+    <img src="assets/hero.jpg" class="active" data-index="0" alt="Hero">
+    <img src="assets/ff-1.jpg" data-index="1" alt="Social Proof">
+    <img src="assets/ff-8.jpg" data-index="2" alt="Doctor Endorsement">
+    <img src="assets/ff-20.jpg" data-index="3" alt="How to Use">
+    <video src="assets/demo.mp4" data-index="4" controls playsinline preload="metadata"></video>
+    <img src="assets/ff-12.jpg" data-index="5" alt="Comparison Chart">
+    <img src="assets/ff-3.jpg" data-index="6" alt="Data-Driven">
+    <img src="assets/ff-16.jpg" data-index="7" alt="Waterproof">
+    <img src="assets/ff-15.jpg" data-index="8" alt="Whisper Quiet">
+    <img src="assets/ff-14.jpg" data-index="9" alt="Discreet Packaging">
+    <video src="assets/closeup-usp.mp4" data-index="10" controls playsinline preload="metadata"></video>
+    <img src="assets/ff-2.jpg" data-index="11" alt="Couples Play">
+  </div>
+  
+  <div class="main-label" id="mainLabel">
+    <span class="slot-num">#1</span> Hero Product Shot
+  </div>
+  
+  <div class="thumbstrip" id="thumbstrip">
+    <div class="thumb active" data-index="0" onclick="select(0)">
+      <img src="assets/hero.jpg" alt="">
+      <div class="slot">1</div>
+    </div>
+    <div class="thumb" data-index="1" onclick="select(1)">
+      <img src="assets/ff-1.jpg" alt="">
+      <div class="slot">2</div>
+    </div>
+    <div class="thumb" data-index="2" onclick="select(2)">
+      <img src="assets/ff-8.jpg" alt="">
+      <div class="new-dot"></div>
+      <div class="slot">3</div>
+    </div>
+    <div class="thumb" data-index="3" onclick="select(3)">
+      <img src="assets/ff-20.jpg" alt="">
+      <div class="new-dot"></div>
+      <div class="slot">4</div>
+    </div>
+    <div class="thumb" data-index="4" onclick="select(4)">
+      <video src="assets/demo.mp4" preload="metadata" muted></video>
+      <div class="overlay"><div class="play-icon"></div></div>
+      <div class="slot">5</div>
+    </div>
+    <div class="thumb" data-index="5" onclick="select(5)">
+      <img src="assets/ff-12.jpg" alt="">
+      <div class="new-dot"></div>
+      <div class="slot">6</div>
+    </div>
+    <div class="thumb" data-index="6" onclick="select(6)">
+      <img src="assets/ff-3.jpg" alt="">
+      <div class="slot">7</div>
+    </div>
+    <div class="thumb" data-index="7" onclick="select(7)">
+      <img src="assets/ff-16.jpg" alt="">
+      <div class="slot">8</div>
+    </div>
+    <div class="thumb" data-index="8" onclick="select(8)">
+      <img src="assets/ff-15.jpg" alt="">
+      <div class="slot">9</div>
+    </div>
+    <div class="thumb" data-index="9" onclick="select(9)">
+      <img src="assets/ff-14.jpg" alt="">
+      <div class="slot">10</div>
+    </div>
+    <div class="thumb" data-index="10" onclick="select(10)">
+      <video src="assets/closeup-usp.mp4" preload="metadata" muted></video>
+      <div class="overlay"><div class="play-icon"></div></div>
+      <div class="slot">11</div>
+    </div>
+    <div class="thumb" data-index="11" onclick="select(11)">
+      <img src="assets/ff-2.jpg" alt="">
+      <div class="slot">12</div>
+    </div>
+  </div>
+  
+  <div class="info-section">
+    <h2>📋 Gallery Slot Guide</h2>
+    <ul class="slot-list">
+      <li onclick="select(0)"><span class="num">1</span> Hero Product Shot <span class="tag tag-keep">KEEP</span></li>
+      <li onclick="select(1)"><span class="num">2</span> Social Proof — 500K+ Customers <span class="tag tag-keep">KEEP</span></li>
+      <li onclick="select(2)"><span class="num">3</span> Doctor Endorsement — Dr. Angela Wright <span class="tag tag-new">NEW</span></li>
+      <li onclick="select(3)"><span class="num">4</span> How to Use — 5-Step Guide <span class="tag tag-new">NEW</span></li>
+      <li onclick="select(4)"><span class="num">5</span> Product Demo Video <span class="tag tag-video">VIDEO</span></li>
+      <li onclick="select(5)"><span class="num">6</span> Comparison Chart — vs Competitors <span class="tag tag-new">NEW</span></li>
+      <li onclick="select(6)"><span class="num">7</span> Data-Driven Design — Stats</li>
+      <li onclick="select(7)"><span class="num">8</span> Waterproof — IPX7 Rated</li>
+      <li onclick="select(8)"><span class="num">9</span> Whisper Quiet — <50dB</li>
+      <li onclick="select(9)"><span class="num">10</span> Discreet Packaging</li>
+      <li onclick="select(10)"><span class="num">11</span> Close-up USP Video <span class="tag tag-video">VIDEO</span></li>
+      <li onclick="select(11)"><span class="num">12</span> Couples Play</li>
+    </ul>
+  </div>
+  
+  <div class="footer-note">
+    <strong>⚠️ Still needed (filming required):</strong><br>
+    Slot 13: Suction demo — air pulse movement visible on surface<br>
+    Slot 14: Waterproof demo — Lem under running water
+  </div>
+</div>
+
+<div class="footer">
+  Nancy Gallery Preview · For internal review only
+</div>
+
+<script>
+const labels = [
+  { num: 1, text: 'Hero Product Shot' },
+  { num: 2, text: 'Social Proof — 500K+ Customers' },
+  { num: 3, text: 'Doctor Endorsement — Dr. Angela Wright', isNew: true },
+  { num: 4, text: 'How to Use — 5-Step Guide', isNew: true },
+  { num: 5, text: 'Product Demo Video', isVideo: true },
+  { num: 6, text: 'Comparison Chart — vs Competitors', isNew: true },
+  { num: 7, text: 'Data-Driven Design — Stats' },
+  { num: 8, text: 'Waterproof — IPX7 Rated' },
+  { num: 9, text: 'Whisper Quiet — <50dB' },
+  { num: 10, text: 'Discreet Packaging' },
+  { num: 11, text: 'Close-up USP Video', isVideo: true },
+  { num: 12, text: 'Couples Play' }
+];
+
+let current = 0;
+
+function select(index) {
+  // Pause any playing videos
+  document.querySelectorAll('.main-viewer video').forEach(v => { v.pause(); v.classList.remove('active'); });
+  document.querySelectorAll('.main-viewer img').forEach(img => img.classList.remove('active'));
+  
+  const items = document.querySelectorAll('.main-viewer > *');
+  items[index].classList.add('active');
+  
+  document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.thumb')[index].classList.add('active');
+  
+  const label = labels[index];
+  let html = `<span class="slot-num">#${label.num}</span> ${label.text}`;
+  if (label.isNew) html += ' <span class="new-badge">NEW</span>';
+  if (label.isVideo) html += ' <span class="video-badge">🎬 VIDEO</span>';
+  document.getElementById('mainLabel').innerHTML = html;
+  
+  // Scroll thumb into view
+  document.querySelectorAll('.thumb')[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  
+  current = index;
+}
+
+// Swipe support
+let startX = 0;
+const viewer = document.getElementById('mainViewer');
+viewer.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+viewer.addEventListener('touchend', e => {
+  const diff = startX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0 && current < labels.length - 1) select(current + 1);
+    if (diff < 0 && current > 0) select(current - 1);
+  }
+});
+</script>
+</body>
+</html>
