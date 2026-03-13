@@ -41,6 +41,9 @@
   .thumb .new-dot { position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; background: #ff4444; border-radius: 50%; }
   .thumb .slot { position: absolute; bottom: 2px; left: 4px; font-size: 0.55rem; color: #fff; background: rgba(0,0,0,0.5); padding: 1px 4px; border-radius: 3px; font-weight: 600; }
   
+  .thumb-wrapper { display: flex; flex-direction: column; align-items: center; flex: 0 0 72px; scroll-snap-align: start; }
+  .thumb-label { font-size: 0.55rem; color: #888; text-align: center; margin-top: 4px; max-width: 72px; line-height: 1.2; font-weight: 500; }
+  
   .info-section { margin-top: 24px; background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
   .info-section h2 { font-size: 1rem; margin-bottom: 12px; color: #1a1a1a; }
   .slot-list { list-style: none; }
@@ -87,58 +90,94 @@
   </div>
   
   <div class="thumbstrip" id="thumbstrip">
-    <div class="thumb active" data-index="0" onclick="select(0)">
-      <img src="assets/hero.jpg" alt="">
-      <div class="slot">1</div>
+    <div class="thumb-wrapper" onclick="select(0)">
+      <div class="thumb active" data-index="0">
+        <img src="assets/hero.jpg" alt="">
+        <div class="slot">1</div>
+      </div>
+      <div class="thumb-label">Hero</div>
     </div>
-    <div class="thumb" data-index="1" onclick="select(1)">
-      <img src="assets/ff-1.jpg" alt="">
-      <div class="slot">2</div>
+    <div class="thumb-wrapper" onclick="select(1)">
+      <div class="thumb" data-index="1">
+        <img src="assets/ff-1.jpg" alt="">
+        <div class="slot">2</div>
+      </div>
+      <div class="thumb-label">Social Proof</div>
     </div>
-    <div class="thumb" data-index="2" onclick="select(2)">
-      <img src="assets/ff-8.jpg" alt="">
-      <div class="new-dot"></div>
-      <div class="slot">3</div>
+    <div class="thumb-wrapper" onclick="select(2)">
+      <div class="thumb" data-index="2">
+        <img src="assets/ff-8.jpg" alt="">
+        <div class="new-dot"></div>
+        <div class="slot">3</div>
+      </div>
+      <div class="thumb-label">Doctor 🔴</div>
     </div>
-    <div class="thumb" data-index="3" onclick="select(3)">
-      <img src="assets/ff-20.jpg" alt="">
-      <div class="new-dot"></div>
-      <div class="slot">4</div>
+    <div class="thumb-wrapper" onclick="select(3)">
+      <div class="thumb" data-index="3">
+        <img src="assets/ff-20.jpg" alt="">
+        <div class="new-dot"></div>
+        <div class="slot">4</div>
+      </div>
+      <div class="thumb-label">How to Use 🔴</div>
     </div>
-    <div class="thumb" data-index="4" onclick="select(4)">
-      <video src="assets/demo.mp4" preload="metadata" muted></video>
-      <div class="overlay"><div class="play-icon"></div></div>
-      <div class="slot">5</div>
+    <div class="thumb-wrapper" onclick="select(4)">
+      <div class="thumb" data-index="4">
+        <video src="assets/demo.mp4" preload="metadata" muted></video>
+        <div class="overlay"><div class="play-icon"></div></div>
+        <div class="slot">5</div>
+      </div>
+      <div class="thumb-label">Demo 🎬</div>
     </div>
-    <div class="thumb" data-index="5" onclick="select(5)">
-      <img src="assets/ff-12.jpg" alt="">
-      <div class="new-dot"></div>
-      <div class="slot">6</div>
+    <div class="thumb-wrapper" onclick="select(5)">
+      <div class="thumb" data-index="5">
+        <img src="assets/ff-12.jpg" alt="">
+        <div class="new-dot"></div>
+        <div class="slot">6</div>
+      </div>
+      <div class="thumb-label">Compare 🔴</div>
     </div>
-    <div class="thumb" data-index="6" onclick="select(6)">
-      <img src="assets/ff-3.jpg" alt="">
-      <div class="slot">7</div>
+    <div class="thumb-wrapper" onclick="select(6)">
+      <div class="thumb" data-index="6">
+        <img src="assets/ff-3.jpg" alt="">
+        <div class="slot">7</div>
+      </div>
+      <div class="thumb-label">Data</div>
     </div>
-    <div class="thumb" data-index="7" onclick="select(7)">
-      <img src="assets/ff-16.jpg" alt="">
-      <div class="slot">8</div>
+    <div class="thumb-wrapper" onclick="select(7)">
+      <div class="thumb" data-index="7">
+        <img src="assets/ff-16.jpg" alt="">
+        <div class="slot">8</div>
+      </div>
+      <div class="thumb-label">Waterproof</div>
     </div>
-    <div class="thumb" data-index="8" onclick="select(8)">
-      <img src="assets/ff-15.jpg" alt="">
-      <div class="slot">9</div>
+    <div class="thumb-wrapper" onclick="select(8)">
+      <div class="thumb" data-index="8">
+        <img src="assets/ff-15.jpg" alt="">
+        <div class="slot">9</div>
+      </div>
+      <div class="thumb-label">Quiet</div>
     </div>
-    <div class="thumb" data-index="9" onclick="select(9)">
-      <img src="assets/ff-14.jpg" alt="">
-      <div class="slot">10</div>
+    <div class="thumb-wrapper" onclick="select(9)">
+      <div class="thumb" data-index="9">
+        <img src="assets/ff-14.jpg" alt="">
+        <div class="slot">10</div>
+      </div>
+      <div class="thumb-label">Packaging</div>
     </div>
-    <div class="thumb" data-index="10" onclick="select(10)">
-      <video src="assets/closeup-usp.mp4" preload="metadata" muted></video>
-      <div class="overlay"><div class="play-icon"></div></div>
-      <div class="slot">11</div>
+    <div class="thumb-wrapper" onclick="select(10)">
+      <div class="thumb" data-index="10">
+        <video src="assets/closeup-usp.mp4" preload="metadata" muted></video>
+        <div class="overlay"><div class="play-icon"></div></div>
+        <div class="slot">11</div>
+      </div>
+      <div class="thumb-label">Close-up 🎬</div>
     </div>
-    <div class="thumb" data-index="11" onclick="select(11)">
-      <img src="assets/ff-2.jpg" alt="">
-      <div class="slot">12</div>
+    <div class="thumb-wrapper" onclick="select(11)">
+      <div class="thumb" data-index="11">
+        <img src="assets/ff-2.jpg" alt="">
+        <div class="slot">12</div>
+      </div>
+      <div class="thumb-label">Couples</div>
     </div>
   </div>
   
@@ -197,8 +236,8 @@ function select(index) {
   const items = document.querySelectorAll('.main-viewer > *');
   items[index].classList.add('active');
   
-  document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.thumb')[index].classList.add('active');
+  document.querySelectorAll('.thumbstrip .thumb').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.thumbstrip .thumb')[index].classList.add('active');
   
   const label = labels[index];
   let html = `<span class="slot-num">#${label.num}</span> ${label.text}`;
@@ -207,7 +246,7 @@ function select(index) {
   document.getElementById('mainLabel').innerHTML = html;
   
   // Scroll thumb into view
-  document.querySelectorAll('.thumb')[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  document.querySelectorAll('.thumb-wrapper')[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
   
   current = index;
 }
